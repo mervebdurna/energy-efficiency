@@ -2,7 +2,7 @@ import pymongo
 import pandas as pd
 import json
 from dotenv import load_dotenv
-from energy_efficiency.logger import logging
+from energy_efficiency import logging
 from energy_efficiency.config import mongo_client
 
 logging.info(f"Loading enviroment variable from .env file.")
@@ -25,7 +25,7 @@ if __name__=="__main__":
 
     json_record = list(json.loads(df.T.to_json()).values())
     print(json_record[0:2])
-
+    
     #insert converted json record to mongo db
     client[DATABASE_NAME][COLLECTION_NAME].insert_many(json_record)
     
